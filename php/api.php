@@ -4,21 +4,32 @@ header("Access-Control-Allow-Headers: X-Request-Width");
 
 header("Content-Type: application/json");
 
+$value = $_GET["fare"];
 
-$toDo = [
-    [
-      "id" => 1,
+
+// $toDo = [
+//     [
+//       "id" => 1,
+//       "task" => "Fare la spesa",
+//       "completed" => false,
+//       "fare" => $value
+//     ],
+//     [
+//       "id"=> 2,
+//       "task" => "Lavare i piatti",
+//       "completed" => true
+//     ]
+// ];
+$jsonTodoList = file_get_contents("todo.json", true);
+$todoList = json_decode($jsonTodoList);
+
+$toDo[]= [
       "task" => "Fare la spesa",
-      "completed" => false
-    ],
-    [
-      "id"=> 2,
-      "task" => "Lavare i piatti",
-      "completed" => true
-    ]
-];
-$jsonTodoList = json_encode($toDo);
-file_put_contents(__DIR__ . "todo.json", $jsonTodoList);
+      "completed" => false,
+      "fare" => $value
+],
 
-echo "ok";
+$jsonTodoList = json_encode($toDo);
+file_put_contents("todo.json", $jsonTodoList);
+
 ?>
