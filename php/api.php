@@ -1,21 +1,24 @@
 <?php
 header("Access-Control-Allow-Origin: http://localhost:5173");
-header("Access-Control-Allow-Headers: X-Requested-Width");
+header("Access-Control-Allow-Headers: X-Requested-With");
 
 header("Content-Type: application/json");
 
-$value = $_GET["fare"];
+$value = $_GET["task"];
 
-$jsonTodoList = file_get_contents("todo.json", true);
+$jsonTodoList = file_get_contents("./todo.json", true);
 $todoList = json_decode($jsonTodoList);
 
 $toDo[]= [
-      "task" => "Fare la spesa",
+      "id" => 100,
+      "task" => $value,
       "completed" => false,
-      "fare" => $value
+ 
 ];
 
-$jsonTodoList = json_encode($toDo);
-file_put_contents("todo.json", $jsonTodoList);
+
+var_dump($toDo);
+file_put_contents("todo.json", json_encode($toDo));
+
 
 ?>
