@@ -1,6 +1,16 @@
 <script>
+import axios from 'axios';
+
+const API_URL = "http://localhost/api.php";
+
 export default {
-    
+ mounted(){
+    axios.get(API_URL)
+    .then(res => {
+        const data= res.data;
+        console.log(data);
+    })
+ }    
 }
 
 
