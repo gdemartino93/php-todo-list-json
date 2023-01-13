@@ -5,16 +5,28 @@ export default {
 data(){
   return{
     task : "",
+    todoList : []
   }
 },
 methods: {
   getAll(){
-  
     axios.get(API_URL + "api.php")
     .then(res => {
       const data = res.data;
-      console.log(data);
+      this.todoList = data;
+      console.log(this.todoList);
     })
+  },
+  addNew(e){
+    e.preventDefault();
+    const params = { params: {
+      "newTask" : this.task
+    }};
+    axios.get(API_URL + "newtask.php",params)
+    .then(() => {
+      this.getAll();
+    })
+    this.task = "";
   }
 },
 mounted(){
@@ -26,11 +38,16 @@ mounted(){
 </script>
 
 <template>
-    <form action="">
+    <form action="" @submit="addNew">
       <label for="">Inserisci task: </label>
       <input type="text" v-model="task">
-      <input type="submit" value="Add">
+      <input type="submit" value="Add" @click="addNew">
     </form>
+    <ul>
+      <li v-for="(task,index) in todoList" :key="index">
+        {{ task.text }}
+      </li>
+    </ul>
 </template>
 
 <style scoped>
