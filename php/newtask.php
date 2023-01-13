@@ -16,11 +16,13 @@ if ( $newTask !== ""){
         "text" => $newTask,
         "completed" => false
     ];
-    
+
+
     
     
     
     $jsonTodoList = json_encode($todoList);
     file_put_contents("todo.json" , $jsonTodoList);
-}
+};
+
 

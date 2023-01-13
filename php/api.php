@@ -6,4 +6,6 @@ header("Content-Type: application/json");
 
 $jsonTodoList = file_get_contents("todo.json");
 echo $jsonTodoList;
+
+
 ?>

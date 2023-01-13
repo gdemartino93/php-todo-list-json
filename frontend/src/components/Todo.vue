@@ -14,8 +14,8 @@ methods: {
     .then(res => {
       const data = res.data;
       this.todoList = data;
-      console.log(this.todoList);
-    })
+    });
+
   },
   addNew(e){
     e.preventDefault();
@@ -44,12 +44,16 @@ mounted(){
       <input type="submit" value="Add" @click="addNew">
     </form>
     <ul>
-      <li v-for="(task,index) in todoList" :key="index">
+      <li v-for="(task,index) in todoList" :key="index" :class="task.completed == true ? 'sottolineato': ''">
         {{ task.text }}
+        {{ task.completed }}
       </li>
     </ul>
 </template>
 
 <style scoped>
+.sottolineato{
+  text-decoration:line-through;
+}
 
 </style>
