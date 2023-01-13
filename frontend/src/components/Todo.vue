@@ -27,7 +27,7 @@ methods: {
       this.getAll();
     })
     this.task = "";
-  }
+  },
 },
 mounted(){
   this.getAll();
@@ -44,7 +44,7 @@ mounted(){
       <input type="submit" value="Add" @click="addNew">
     </form>
     <ul>
-      <li v-for="(task,index) in todoList" :key="index" :class="task.completed == true ? 'sottolineato': ''">
+      <li v-for="(task,index) in todoList" :key="index" :class="task.completed == true ? 'taskDone': ''">
         {{ task.text }}
         {{ task.completed }}
       </li>
@@ -52,7 +52,7 @@ mounted(){
 </template>
 
 <style scoped>
-.sottolineato{
+.taskDone{
   text-decoration:line-through;
 }
 
