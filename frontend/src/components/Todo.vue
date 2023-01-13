@@ -28,6 +28,14 @@ methods: {
     })
     this.task = "";
   },
+  taskDone(i){
+    const params = { params: {
+      "id" : i
+    }}
+    axios.get(API_URL + "newtask.php", params)
+   
+    console.log(i);
+  }
 },
 mounted(){
   this.getAll();
@@ -41,10 +49,10 @@ mounted(){
     <form action="" @submit="addNew">
       <label for="">Inserisci task: </label>
       <input type="text" v-model="task">
-      <input type="submit" value="Add" @click="addNew">
+      <input type="submit" value="Add" >
     </form>
     <ul>
-      <li v-for="(task,index) in todoList" :key="index" :class="task.completed == true ? 'taskDone': ''">
+      <li v-for="(task,index) in todoList" :key="index" :class="task.completed == true ? 'taskDone': ''" @click="taskDone(index)">
         {{ task.text }}
         {{ task.completed }}
       </li>

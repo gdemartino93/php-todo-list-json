@@ -3,12 +3,13 @@ header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Headers: X-Requested-With");
 
 header("Content-Type: application/json");
+$id = $_GET["id"];
 
-$jsonString = file_get_contents("todo.json");
-echo $jsonString;
+$jsonTodoList = file_get_contents("todo.json");
+$todoList = json_decode($jsonTodoList);
 
-function doTask($id){
-    foreach ( ){
+$todoList[$id]["completed"] = !$todoList[$id]["completed"];
 
-    }
-};
+
+$jsonTodoList = json_encode($todoList);
+file_put_contents("todo.json" , $jsonTodoList);
