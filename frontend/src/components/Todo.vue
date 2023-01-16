@@ -60,12 +60,12 @@ mounted(){
     <form action="" @submit="addNew">
       <label for="">Inserisci task: </label>
       <input type="text" v-model="task">
-      <input type="submit" value="Add" >
+      <input type="submit" value="Add" class="btn btn-primary">
     </form>
     <ul>
       <li v-for="(task,index) in todoList" :key="index">
         <span   @click="taskDone(index)" :class="task.completed == true ? 'taskDone': ''">{{ task.text }}</span>
-        <span @click="deleteTask(index)"> - X</span>
+        <span @click="deleteTask(index)"><font-awesome-icon icon="fa-solid fa-trash" /></span>
       </li>
       
     </ul>
