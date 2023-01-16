@@ -32,7 +32,10 @@ methods: {
     const params = { params: {
       "id" : i
     }}
-    axios.get(API_URL + "newtask.php", params)
+    axios.get(API_URL + "taskdone.php", params)
+          .then(() =>{
+            this.getAll();
+          })
    
     console.log(i);
   }
@@ -54,7 +57,6 @@ mounted(){
     <ul>
       <li v-for="(task,index) in todoList" :key="index" :class="task.completed == true ? 'taskDone': ''" @click="taskDone(index)">
         {{ task.text }}
-        {{ task.completed }}
       </li>
     </ul>
 </template>
