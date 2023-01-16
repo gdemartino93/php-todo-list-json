@@ -94,8 +94,27 @@ mounted(){
 span{
   cursor: pointer;
 }
-.postit{
+/* .postit{
   background-color: bisque;
+} */
+.postit{
+  background: linear-gradient(
+    180deg,
+    rgba(187, 235, 255, 1) 0%,
+    rgba(187, 235, 255, 1) 12%,
+    rgba(170, 220, 241, 1) 75%,
+    rgba(195, 229, 244, 1) 100%
+  );
+  width: 100px;
+  height: 100px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Kalam', cursive;
+  font-size: 1.25rem;
+
+  clip-path: url(#stickyClip);
 }
 
 </style>
