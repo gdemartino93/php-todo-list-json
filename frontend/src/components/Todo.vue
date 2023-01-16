@@ -76,8 +76,8 @@ mounted(){
     </form>
     <ul>
       <li v-for="(task,index) in todoList" :key="index" class="postit" :style="{ position: 'absolute', left: task.randomX + 'px', top: task.randomY + 'px' }">
-        <span @click="taskDone(index)" :class="task.completed == true ? 'taskDone': ''">{{ task.text }}</span>
-        <span @click="deleteTask(index)"><font-awesome-icon icon="fa-solid fa-trash" /></span>
+        <span @click="taskDone(index)" :class="task.completed == true ? 'postit': 'postitDone'">{{ task.text }}</span>
+        <span  :class="task.completed == true ? 'postit': 'postitDone'"><font-awesome-icon icon="fa-solid fa-trash" @click="deleteTask(index)" /></span>
       </li>
     </ul>
     <!-- <div class="postit" :style="{ position: 'absolute', left: randomX + 'px', top: randomY + 'px' }"> -->
@@ -100,11 +100,24 @@ span{
 .postit{
   background: linear-gradient(
     180deg,
-    rgba(187, 235, 255, 1) 0%,
-    rgba(187, 235, 255, 1) 12%,
-    rgba(170, 220, 241, 1) 75%,
-    rgba(195, 229, 244, 1) 100%
+    rgb(0, 179, 60) 0%,
+    rgb(6, 94, 60) 12%,
+    rgb(54, 255, 3) 75%,
+    rgb(102, 237, 84) 100%
   );
+  width: 100px;
+  height: 100px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Kalam', cursive;
+  font-size: 1.25rem;
+
+  clip-path: url(#stickyClip);
+}
+.postitDone{
+  background: red;
   width: 100px;
   height: 100px;
 
