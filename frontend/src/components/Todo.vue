@@ -1,11 +1,12 @@
 <script >
 import axios from 'axios';
 const API_URL = "http://localhost/";
+
 export default {
 data(){
   return{
     task : "",
-    todoList : []
+    todoList : [],
   }
 },
 methods: {
@@ -15,16 +16,22 @@ methods: {
       const data = res.data;
       this.todoList = data;
     });
-
   },
   addNew(e){
     e.preventDefault();
+    this.todoList.push({
+      text: this.task,
+      randomX : Math.floor(Math.random() * window.innerWidth),
+      randomY : Math.floor(Math.random() * window.innerHeight)
+
+    })
     const params = { params: {
       "newTask" : this.task
     }};
     axios.get(API_URL + "newtask.php",params)
     .then(() => {
       this.getAll();
+      
     })
     this.task = "";
   },
@@ -46,6 +53,10 @@ methods: {
           this.getAll();
         })
         console.log(i);
+  },
+  generateCord(){
+      this.randomX = Math.floor(Math.random() * window.innerWidth);
+      this.randomY = Math.floor(Math.random() * window.innerHeight);
   }
 },
 mounted(){
@@ -57,18 +68,23 @@ mounted(){
 </script>
 
 <template>
+  <div class="col-12 col-sm-5 d-flex flex-column">
     <form action="" @submit="addNew">
       <label for="">Inserisci task: </label>
-      <input type="text" v-model="task">
+      <input type="text" v-model="task" class="form-control">
       <input type="submit" value="Add" class="btn btn-primary">
     </form>
     <ul>
-      <li v-for="(task,index) in todoList" :key="index">
-        <span   @click="taskDone(index)" :class="task.completed == true ? 'taskDone': ''">{{ task.text }}</span>
+      <li v-for="(task,index) in todoList" :key="index" class="postit" :style="{ position: 'absolute', left: task.randomX + 'px', top: task.randomY + 'px' }">
+        <span @click="taskDone(index)" :class="task.completed == true ? 'taskDone': ''">{{ task.text }}</span>
         <span @click="deleteTask(index)"><font-awesome-icon icon="fa-solid fa-trash" /></span>
       </li>
-      
     </ul>
+    <!-- <div class="postit" :style="{ position: 'absolute', left: randomX + 'px', top: randomY + 'px' }"> -->
+      
+    <!-- </div> -->
+  </div>
+
 </template>
 
 <style scoped>
@@ -77,6 +93,9 @@ mounted(){
 }
 span{
   cursor: pointer;
+}
+.postit{
+  background-color: bisque;
 }
 
 </style>
