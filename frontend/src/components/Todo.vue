@@ -36,8 +36,16 @@ methods: {
           .then(() =>{
             this.getAll();
           })
-   
-    console.log(i);
+     },
+  deleteTask(i){
+    const params = { params: {
+      "id" : i
+    }}
+    axios.get(API_URL + "deleteTask.php", params)
+        .then(() =>{
+          this.getAll();
+        })
+        console.log(i);
   }
 },
 mounted(){
@@ -55,15 +63,20 @@ mounted(){
       <input type="submit" value="Add" >
     </form>
     <ul>
-      <li v-for="(task,index) in todoList" :key="index" :class="task.completed == true ? 'taskDone': ''" @click="taskDone(index)">
-        {{ task.text }}
+      <li v-for="(task,index) in todoList" :key="index">
+        <span   @click="taskDone(index)" :class="task.completed == true ? 'taskDone': ''">{{ task.text }}</span>
+        <span @click="deleteTask(index)"> - X</span>
       </li>
+      
     </ul>
 </template>
 
 <style scoped>
 .taskDone{
   text-decoration:line-through;
+}
+span{
+  cursor: pointer;
 }
 
 </style>
