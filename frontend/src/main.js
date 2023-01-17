@@ -15,6 +15,8 @@ import { faTrash, faUserSecret } from '@fortawesome/free-solid-svg-icons'
 /* add icons to the library */
 library.add(faUserSecret,faTrash)
 
+import 'animate.css';
+
 createApp(App)
 .component('font-awesome-icon', FontAwesomeIcon)
 .mount('#app')

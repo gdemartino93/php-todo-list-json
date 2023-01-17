@@ -72,7 +72,6 @@ mounted(){
   this.getAll();
 }
 }
-
 </script>
 
 <template>
@@ -91,7 +90,7 @@ mounted(){
       <input type="submit" value="Add" class="btn btn-primary">
     </form>
     <ul>
-      <li v-for="(task,index) in todoList" :key="index" class="postit" :style="{ position: 'absolute', left: task.randomX + 'px', top: task.randomY + 'px' }">
+      <li v-for="(task,index) in todoList" :key="index" class="postit animate__animated animate__backInDown" :style="{ position: 'absolute', left: task.randomX + 'px', top: task.randomY + 'px' }">
         <span @click="taskDone(index)" :class="task.completed == true ? 'postit': 'postitDone'">{{ task.text }}</span>
         <span  :class="task.completed == true ? 'postit': 'postitDone'"><font-awesome-icon icon="fa-solid fa-trash" @click="deleteTask(index)" /></span>
       </li>
