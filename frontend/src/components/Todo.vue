@@ -7,6 +7,9 @@ data(){
   return{
     task : "",
     todoList : [],
+    errorTask: undefined,
+    taskAdded : undefined,
+
   }
 },
 methods: {
@@ -19,21 +22,27 @@ methods: {
   },
   addNew(e){
     e.preventDefault();
-    this.todoList.push({
-      text: this.task,
-      randomX : Math.floor(Math.random() * window.innerWidth),
-      randomY : Math.floor(Math.random() * window.innerHeight)
+    if ( this.task !== ""){
+      this.todoList.push({
+        text: this.task,
+        randomX : Math.floor(Math.random() * window.innerWidth),
+        randomY : Math.floor(Math.random() * window.innerHeight)
 
-    })
-    const params = { params: {
-      "newTask" : this.task
-    }};
-    axios.get(API_URL + "newtask.php",params)
-    .then(() => {
-      this.getAll();
-      
-    })
-    this.task = "";
+      })
+      const params = { params: {
+        "newTask" : this.task
+      }};
+      axios.get(API_URL + "newtask.php",params)
+      .then(() => {
+        this.getAll();
+        
+      })
+      this.task = "";
+      this.taskAdded = true
+      this.errorTask = false
+  }else{
+    this.errorTask = true
+  }
   },
   taskDone(i){
     const params = { params: {
@@ -64,11 +73,18 @@ mounted(){
 }
 }
 
-
 </script>
 
 <template>
   <div class="col-12 col-sm-5 d-flex flex-column">
+    <div class="alert alert-success" role="alert" v-if="taskAdded == true && errorTask == false">
+         Task aggiunta con successo
+    </div>
+    <div class="alert alert-danger" role="alert" v-else-if="errorTask">
+         Il campo non può essere vuoto
+    </div>
+
+
     <form action="" @submit="addNew">
       <label for="">Inserisci task: </label>
       <input type="text" v-model="task" class="form-control">
